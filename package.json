@@ -1,0 +1,122 @@
+{
+  "name": "@softwarecitadel/adonisjs-girouette",
+  "version": "0.0.0",
+  "description": "Girouette is a AdonisJS package providing decorators to handle routing.",
+  "main": "build/providers/GirouetteProvider.js",
+  "scripts": {
+    "mrm": "mrm --preset=@adonisjs/mrm-preset",
+    "pretest": "npm run lint",
+    "test": "echo 'ok'",
+    "clean": "del-cli build",
+    "compile": "npm run lint && npm run clean && tsc",
+    "build": "npm run compile",
+    "prepublishOnly": "npm run build",
+    "lint": "eslint . --ext=.ts",
+    "format": "prettier --write .",
+    "commit": "git-cz",
+    "release": "np --message=\"chore(release): %s\"",
+    "version": "npm run build",
+    "sync-labels": "github-label-sync --labels ./node_modules/@adonisjs/mrm-preset/gh-labels.json softwarecitadel/adonisjs-decoratorus"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/softwarecitadel/adonisjs-girouette.git"
+  },
+  "author": "Alexis Bouchez",
+  "keywords": [
+    "adonis",
+    "routing",
+    "decorators"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/softwarecitadel/adonisjs-girouette/issues"
+  },
+  "homepage": "https://github.com/softwarecitadel/adonisjs-girouette#readme",
+  "peerDependencies": {
+    "@adonisjs/core": "^5.8.9"
+  },
+  "devDependencies": {
+    "@adonisjs/core": "^5.8.9",
+    "@adonisjs/mrm-preset": "^5.0.3",
+    "@adonisjs/require-ts": "^2.0.13",
+    "@types/node": "^18.11.9",
+    "commitizen": "^4.2.5",
+    "cz-conventional-changelog": "^3.3.0",
+    "del-cli": "^5.0.0",
+    "eslint": "^8.28.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-adonis": "^2.1.1",
+    "eslint-plugin-prettier": "^4.2.1",
+    "github-label-sync": "^2.2.0",
+    "husky": "^8.0.2",
+    "mrm": "^4.1.13",
+    "np": "^7.6.2",
+    "prettier": "^2.7.1",
+    "typescript": "^4.9.3"
+  },
+  "types": "build/adonis-typings/index.d.ts",
+  "typings": "./build/adonis-typings/index.d.ts",
+  "mrmConfig": {
+    "core": false,
+    "license": "MIT",
+    "services": [],
+    "minNodeVersion": "16.13.1",
+    "probotApps": []
+  },
+  "files": [
+    "build/adonis-typings",
+    "build/src",
+    "build/providers"
+  ],
+  "dependencies": {
+    "reflect-metadata": "^0.1.13"
+  },
+  "eslintConfig": {
+    "extends": [
+      "plugin:adonis/typescriptPackage",
+      "prettier"
+    ],
+    "plugins": [
+      "prettier"
+    ],
+    "rules": {
+      "prettier/prettier": [
+        "error",
+        {
+          "endOfLine": "auto"
+        }
+      ]
+    }
+  },
+  "eslintIgnore": [
+    "build"
+  ],
+  "prettier": {
+    "trailingComma": "es5",
+    "semi": false,
+    "singleQuote": true,
+    "useTabs": false,
+    "quoteProps": "consistent",
+    "bracketSpacing": true,
+    "arrowParens": "always",
+    "printWidth": 100
+  },
+  "adonisjs": {
+    "providers": [
+      "@softwarecitadel/adonisjs-girouette"
+    ]
+  },
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
+    }
+  },
+  "np": {
+    "contents": ".",
+    "anyBranch": false,
+    "publishConfig": {
+      "access": "public"
+    }
+  }
+}
