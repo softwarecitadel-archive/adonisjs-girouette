@@ -28,9 +28,16 @@ export default class GirouetteProvider {
 
     for (const controllerPath of listOfHttpControllerPaths) {
       const { default: controller } = require(controllerPath)
+      if (!controller) {
+        continue
+      }
       const routesMetadata = Reflect.getMetadata('__routes__', controller.prototype) as {
         [propertyKey: string]: Metadata
       }
+      if (!routesMetadata) {
+        continue
+      }
+
 
       for (const [propertyKey, routeMetadata] of Object.entries(routesMetadata)) {
         const route = Route.route(
