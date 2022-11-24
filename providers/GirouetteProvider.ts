@@ -34,9 +34,14 @@ export default class GirouetteProvider {
         continue
       }
 
-      const ressourcePattern = Reflect.getMetadata('__resource__', controller)
-      if (ressourcePattern) {
-        Route.resource(ressourcePattern, controller.name)
+      const resourcePattern = Reflect.getMetadata('__resource__', controller)
+      if (resourcePattern) {
+        const resource = Route.resource(resourcePattern, controller.name)
+
+        const resourceName = Reflect.getMetadata('__resource_name__', controller)
+        if (resourceName) {
+          resource.as(resourceName)
+        }
       }
 
       const routesMetadata = Reflect.getMetadata('__routes__', controller.prototype) as {

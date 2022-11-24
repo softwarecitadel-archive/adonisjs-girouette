@@ -66,7 +66,7 @@ export default class CustomersController {
 // CustomersController.ts
 import { Resource } from "@ioc:SoftwareCitadel/Girouette"
 
-@Resource("/customers")
+@Resource("/customers", "customers")
 export default class CustomersController {
   public async index(/* ... */) {
     // ...
