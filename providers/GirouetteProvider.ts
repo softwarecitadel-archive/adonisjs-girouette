@@ -10,6 +10,7 @@ export default class GirouetteProvider {
     this.app.container.singleton('SoftwareCitadel/Girouette', () => {
       const { Middleware } = require('../src/Decorators/Middleware')
       const { Get, Post, Put, Patch, Delete } = require('../src/Decorators/RouteDecorators')
+      const { Resource } = require('../src/Decorators/Resource')
 
       return {
         Middleware,
@@ -18,6 +19,7 @@ export default class GirouetteProvider {
         Put,
         Patch,
         Delete,
+        Resource,
       }
     })
   }
@@ -31,13 +33,18 @@ export default class GirouetteProvider {
       if (!controller) {
         continue
       }
+
+      const ressourcePattern = Reflect.getMetadata('__resource__', controller)
+      if (ressourcePattern) {
+        Route.resource(ressourcePattern, controller.name)
+      }
+
       const routesMetadata = Reflect.getMetadata('__routes__', controller.prototype) as {
         [propertyKey: string]: Metadata
       }
       if (!routesMetadata) {
         continue
       }
-
 
       for (const [propertyKey, routeMetadata] of Object.entries(routesMetadata)) {
         const route = Route.route(
