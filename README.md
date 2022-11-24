@@ -15,7 +15,7 @@ node ace configure @softwarecitadel/adonisjs-girouette
 
 ```typescript
 // CustomersController.ts
-import { Get, Post, Patch, Delete, Middleware } from "@ioc:SoftwareCitadel/adonis-girouette"
+import { Get, Post, Patch, Delete, Middleware } from "@ioc:SoftwareCitadel/Girouette"
 
 export default class CustomersController {
   @Get("/customers", "customers.index")
@@ -59,6 +59,51 @@ export default class CustomersController {
   }
 }
 ```
+
+### Resourceful controller
+
+```typescript
+// CustomersController.ts
+import { Resource } from "@ioc:SoftwareCitadel/Girouette"
+
+@Resource("/customers")
+export default class CustomersController {
+  public async index(/* ... */) {
+    // ...
+  }
+  
+  @Middleware("auth")
+  public async create(/* ... */) {
+    // ...
+  }
+  
+  @Middleware("auth")
+  public async store(/* ... */) {
+    // ...
+  }
+  
+  public async show(/* ... */) {
+    // ...
+  }
+
+  @Middleware("auth")
+  public async edit(/* ... */) {
+    // ...
+  }
+
+  @Middleware("auth")
+  public async update(/* ... */) {
+    // ...
+  }
+
+  @Middleware("auth")
+  public async destroy(/* ... */) {
+    // ...
+  }
+}
+```
+
+
 
 [npm-image]: https://img.shields.io/npm/v/@softwarecitadel/adonisjs-girouette.svg?style=for-the-badge&logo=npm
 [npm-url]: https://npmjs.org/package/@softwarecitadel/adonis-girouette "npm"
