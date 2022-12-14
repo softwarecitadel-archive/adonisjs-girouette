@@ -36,23 +36,27 @@ export default class CustomersController {
   }
   
   @Get("/customers/:id", "customers.show")
+  @Where("id", /^[0-9]+$/)
   public async show(/* ... */) {
     // ...
   }
 
   @Get("/customers/:id/edit", "customers.edit")
+  @Where("id", /^[0-9]+$/)
   @Middleware("auth")
   public async edit(/* ... */) {
     // ...
   }
 
   @Patch("/customers/:id", "customers.update")
+  @Where("id", /^[0-9]+$/)
   @Middleware("auth")
   public async update(/* ... */) {
     // ...
   }
 
   @Delete("/customers/:id", "customers.destroy")
+  @Where("id", /^[0-9]+$/)
   @Middleware("auth")
   public async destroy(/* ... */) {
     // ...
