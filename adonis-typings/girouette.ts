@@ -22,5 +22,7 @@ declare module '@ioc:SoftwareCitadel/Girouette' {
 
   const Resource: (pattern: string, name?: string) => (target: any) => void
 
-  export { Delete, Get, Patch, Post, Put, Middleware, Resource, Where }
+  const ApiOnly: () => (target: any) => void
+
+  export { Delete, Get, Patch, Post, Put, Middleware, Resource, ApiOnly, Where }
 }

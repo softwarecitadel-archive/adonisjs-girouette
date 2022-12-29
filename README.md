@@ -107,6 +107,18 @@ export default class CustomersController {
 }
 ```
 
+You can also create a resource that is API only.
+
+```typescript
+// CustomersController.ts
+import { ApiOnly, Resource } from "@ioc:SoftwareCitadel/Girouette"
+
+@Resource("/users", "users")
+@ApiOnly()
+export default class CustomersController {
+  // ...
+}
+```
 
 
 [npm-image]: https://img.shields.io/npm/v/@softwarecitadel/adonisjs-girouette.svg?style=for-the-badge&logo=npm
