@@ -12,6 +12,7 @@ export default class GirouetteProvider {
       const { Get, Post, Put, Patch, Delete } = require('../src/Decorators/RouteDecorators')
       const { Where } = require('../src/Decorators/Where')
       const { Resource } = require('../src/Decorators/Resource')
+      const { ApiOnly } = require('../src/Decorators/ApiOnly')
 
       return {
         Middleware,
@@ -22,6 +23,7 @@ export default class GirouetteProvider {
         Delete,
         Where,
         Resource,
+        ApiOnly,
       }
     })
   }
@@ -42,6 +44,10 @@ export default class GirouetteProvider {
         const resourceName = Reflect.getMetadata('__resource_name__', controller)
         if (resourceName) {
           resource.as(resourceName)
+        }
+        const apiOnly = Reflect.getMetadata('__resource_api_only__', controller)
+        if (apiOnly) {
+          resource.apiOnly()
         }
       }
 
