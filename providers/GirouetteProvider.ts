@@ -33,14 +33,15 @@ export default class GirouetteProvider {
     const listOfHttpControllerPaths = this.getListOfHttpControllerPaths()
 
     for (const controllerPath of listOfHttpControllerPaths) {
-      const { default: controller } = require(controllerPath)
+      const controller = this.resolveController(controllerPath)
+
       if (!controller) {
         continue
       }
 
       const resourcePattern = Reflect.getMetadata('__resource__', controller)
       if (resourcePattern) {
-        const resource = Route.resource(resourcePattern, controller.name)
+        const resource = Route.resource(resourcePattern, controller.path)
         const resourceName = Reflect.getMetadata('__resource_name__', controller)
         if (resourceName) {
           resource.as(resourceName)
@@ -62,7 +63,7 @@ export default class GirouetteProvider {
         const route = Route.route(
           routeMetadata.pattern,
           [routeMetadata.method],
-          `${controller.name}.${propertyKey}`
+          `${controller.path}.${propertyKey}`
         )
 
         if (routeMetadata.name) {
@@ -84,7 +85,7 @@ export default class GirouetteProvider {
     }
   }
 
-  private getListOfHttpControllerPaths(): string[] {
+  private resolveHttpNamespace(): string {
     let httpControllerNamespace = this.app.namespacesMap.get('httpControllers')!
 
     for (const [key, value] of Object.entries(this.app.container.importAliases)) {
@@ -93,11 +94,26 @@ export default class GirouetteProvider {
         break
       }
     }
+    return httpControllerNamespace
+  }
+
+  private getListOfHttpControllerPaths(): string[] {
+    const httpControllerNamespace = this.resolveHttpNamespace()
 
     const controllerPaths = this.app.helpers
       .fsReadAll(httpControllerNamespace)
       .map((controller) => httpControllerNamespace + '/' + controller.replace('.ts', ''))
 
     return controllerPaths
+  }
+
+  private resolveController(controllerPath: string): any {
+    const { default: controller } = require(controllerPath)
+    if (!controller) {
+      return undefined
+    }
+    let httpControllerNamespace = this.resolveHttpNamespace()
+    controller.path = controllerPath.replace(httpControllerNamespace, '')
+    return controller
   }
 }
