@@ -1,6 +1,6 @@
 {
   "name": "@softwarecitadel/adonisjs-girouette",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "Girouette is a AdonisJS package providing decorators to handle routing.",
   "main": "build/providers/GirouetteProvider.js",
   "scripts": {
