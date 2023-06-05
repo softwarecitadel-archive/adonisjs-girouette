@@ -114,6 +114,9 @@ export default class GirouetteProvider {
     }
     let httpControllerNamespace = this.resolveHttpNamespace()
     controller.path = controllerPath.replace(httpControllerNamespace, '')
+    if (controller.path.startsWith('/')) {
+      controller.path = controller.path.substr(1)
+    }
     return controller
   }
 }
