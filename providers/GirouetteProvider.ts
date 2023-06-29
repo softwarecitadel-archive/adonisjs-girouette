@@ -50,6 +50,10 @@ export default class GirouetteProvider {
         if (apiOnly) {
           resource.apiOnly()
         }
+        const resourceMiddleware = Reflect.getMetadata('__resource_middleware__', controller)
+        if (resourceMiddleware) {
+          resource.middleware(resourceMiddleware)
+        }
       }
 
       const routesMetadata = Reflect.getMetadata('__routes__', controller.prototype) as {

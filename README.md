@@ -70,18 +70,16 @@ export default class CustomersController {
 // CustomersController.ts
 import { Resource } from "@ioc:SoftwareCitadel/Girouette"
 
-@Resource("/customers", "customers")
+@Resource("/customers", "customers", {"*": "auth"})
 export default class CustomersController {
   public async index(/* ... */) {
     // ...
   }
   
-  @Middleware("auth")
   public async create(/* ... */) {
     // ...
   }
   
-  @Middleware("auth")
   public async store(/* ... */) {
     // ...
   }
@@ -90,17 +88,14 @@ export default class CustomersController {
     // ...
   }
 
-  @Middleware("auth")
   public async edit(/* ... */) {
     // ...
   }
 
-  @Middleware("auth")
   public async update(/* ... */) {
     // ...
   }
 
-  @Middleware("auth")
   public async destroy(/* ... */) {
     // ...
   }
