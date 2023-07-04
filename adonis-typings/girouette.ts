@@ -1,5 +1,9 @@
 declare module '@ioc:SoftwareCitadel/Girouette' {
-  import { RouteParamMatcher } from '@ioc:Adonis/Core/Route'
+  import {
+    RouteParamMatcher,
+    ResourceRouteNames,
+    RouteMiddlewareHandler,
+  } from '@ioc:Adonis/Core/Route'
 
   type RouteDecorator = (
     pattern: string,
@@ -20,7 +24,15 @@ declare module '@ioc:SoftwareCitadel/Girouette' {
     matcher: RouteParamMatcher
   ) => (target: any, propertyKey: string, descriptor: PropertyDescriptor) => void
 
-  const Resource: (pattern: string, name?: string) => (target: any) => void
+  const Resource: (
+    pattern: string,
+    name?: string,
+    middleware?: {
+      [P in ResourceRouteNames]?: RouteMiddlewareHandler | RouteMiddlewareHandler[]
+    } & {
+      '*'?: RouteMiddlewareHandler | RouteMiddlewareHandler[]
+    }
+  ) => (target: any) => void
 
   const ApiOnly: () => (target: any) => void
 
