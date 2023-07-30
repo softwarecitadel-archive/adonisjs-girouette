@@ -35,6 +35,8 @@ declare module '@ioc:SoftwareCitadel/Girouette' {
   ) => (target: any) => void
 
   const ApiOnly: () => (target: any) => void
+  const Only: (names: ResourceRouteNames[]) => (target: any) => void
+  const Except: (names: ResourceRouteNames[]) => (target: any) => void
 
-  export { Delete, Get, Patch, Post, Put, Middleware, Resource, ApiOnly, Where }
+  export { Delete, Get, Patch, Post, Put, Middleware, Resource, ApiOnly, Where, Only, Except }
 }

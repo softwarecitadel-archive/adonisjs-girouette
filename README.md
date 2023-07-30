@@ -115,6 +115,34 @@ export default class CustomersController {
 }
 ```
 
+#### Filtering routes
+
+You can restrict specific methods using the `@Except` decorator.
+
+```typescript
+// CustomersController.ts
+import { Except, Resource } from "@ioc:SoftwareCitadel/Girouette"
+
+@Resource("/users", "users")
+@Except(["store", "update", "destroy"])
+export default class CustomersController {
+  // ...
+}
+```
+
+The opposite of `@Except` decorator is the `@Only` decorator which can be used to register only the methods you want.
+
+```typescript
+// CustomersController.ts
+import { Only, Resource } from "@ioc:SoftwareCitadel/Girouette"
+
+@Resource("/users", "users")
+@Only(["index", "show"])
+export default class CustomersController {
+  // ...
+}
+```
+
 
 [npm-image]: https://img.shields.io/npm/v/@softwarecitadel/adonisjs-girouette.svg?style=for-the-badge&logo=npm
 [npm-url]: https://npmjs.org/package/@softwarecitadel/adonis-girouette "npm"

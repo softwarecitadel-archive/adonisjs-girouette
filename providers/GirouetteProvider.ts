@@ -13,6 +13,8 @@ export default class GirouetteProvider {
       const { Where } = require('../src/Decorators/Where')
       const { Resource } = require('../src/Decorators/Resource')
       const { ApiOnly } = require('../src/Decorators/ApiOnly')
+      const { Only } = require('../src/Decorators/Only')
+      const { Except } = require('../src/Decorators/Except')
 
       return {
         Middleware,
@@ -24,6 +26,8 @@ export default class GirouetteProvider {
         Where,
         Resource,
         ApiOnly,
+        Only,
+        Except,
       }
     })
   }
@@ -53,6 +57,14 @@ export default class GirouetteProvider {
         const resourceMiddleware = Reflect.getMetadata('__resource_middleware__', controller)
         if (resourceMiddleware) {
           resource.middleware(resourceMiddleware)
+        }
+        const only = Reflect.getMetadata('__resource_only__', controller)
+        if (only) {
+          resource.only(only)
+        }
+        const except = Reflect.getMetadata('__resource_except__', controller)
+        if (except) {
+          resource.except(except)
         }
       }
 
