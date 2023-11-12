@@ -16,7 +16,7 @@ declare module '@ioc:SoftwareCitadel/Girouette' {
   const Put: RouteDecorator
 
   const Middleware: (
-    middleware: string
+    middleware: string | Array<string>
   ) => (target: any, propertyKey: string, descriptor: PropertyDescriptor) => void
 
   const Where: (
